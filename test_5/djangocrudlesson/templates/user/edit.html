@@ -1,0 +1,37 @@
+{% extends "layout/base.html" %}
+
+{% block  title%} 
+Edit Gender 
+{% endblock title %}
+
+{% block content %}
+
+<div class="col-md-4 mx-auto" class="mt-3"> 
+    <form action="/user/update/{{ user.user_id}}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="userID">User ID</label>
+            <input type="text" class="form-control" id="userID" name="userID" value =" {{user.user_id}}"  / >
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" value =" {{user.first_name}}" / >
+            <label for="middleName">Middle name</label>
+            <input type="text" class="form-control" id="middleName" name="middleName" value =" {{user.middle_name}}" / >
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" value =" {{user.last_name}}" / >
+            <div class="mb-3">
+                <label for="gender_id">Gender</label>
+                <select name="gender_id" id="gender_id" class="form-select">
+                    <option value ="">N/A</option>
+                    <option value ="{{ user.gender_id }}" select hidden>{{user.gender}}"</option>
+                    {% for gender in genders %}
+                        <option value="{{ gender.gender_id }}" {% if gender.gender_id == user.gender_id %}selected{% endif %}>{{gender.gender}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success float-end col-12 col-md-3">Update User</button>
+        <a href="/users" class="btn btn-secondary float-end col-12 col-md-3 me-1">Back</a>
+    </form>
+</div>
+
+{% endblock content %}

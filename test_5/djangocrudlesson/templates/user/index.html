@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+List of user
+{% endblock title %} 
+
+{% block content %}
+
+{% include "include/navbar.html" %}
+
+<a href="/user/create" class="btn btn-success float-end mt-1 me-1">Add user</a>
+{% include "include/messages.html" %}
+<div class="col-md-6 mx-auto">   
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                     <th>USER ID</th>
+                     <th>FIRST NAME</th>
+                     <th>MIDDLE NAME</th>
+                     <th>LAST NAME</th>
+                     <th>GENDER ID</th>
+                     <th>ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.user_id }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.middle_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.gender }}</td>
+                        <td>  
+                            <div class="btn-group">
+                                <a href="/user/show/{{ user.user_id }}" class="btn btn-primary">View</a>
+                                <a href="/user/edit/{{ user.user_id }}" class="btn btn-success">Edit</a>
+                                <a href="/user/delete/{{ user.user_id }}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock content %}
+
